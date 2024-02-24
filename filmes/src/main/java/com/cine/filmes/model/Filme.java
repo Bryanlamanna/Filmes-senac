@@ -16,8 +16,8 @@ public class Filme {
     private int anoLancamento;
 
     // Construtor
-    public Filme(int id, String titulo, String sinopse, String genero, int anoLancamento) {
-        this.id = id;
+    public Filme(String titulo, String sinopse, String genero, int anoLancamento) {
+        
         this.titulo = titulo;
         this.sinopse = sinopse;
         this.genero = genero;
