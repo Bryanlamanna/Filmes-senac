@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,19 +21,19 @@
 
     
 
-    <a href="/detalhes">
+    <a th:href="@{/detalhes}">
         <button class="btn btn-primary">
             Detalhes
         </button>
     </a>
 
-    <a href="/cadastrar">
+    <a th:href="@{/cadastro}">
         <button class="btn btn-primary">
             Cadastrar
         </button>
     </a>
 
-    <a href="/listar">
+    <a th:href="@{/listar}">
         <button class="btn btn-primary">
             Listar
         </button>
@@ -42,6 +42,5 @@
    </div>
     
 </div>   
-    <script src="script.js"></script>
 </body>
 </html>

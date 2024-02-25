@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +10,22 @@
 </head>
 <body>
     
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        function exibirAlerta() {
+            alert('Filme cadastrado com sucesso!');
+        }
+        /*]]>*/
+    </script>
+    
+    <!-- No corpo da sua página HTML, adicione o seguinte código Thymeleaf para verificar se um filme foi cadastrado e exibir o alerta -->
+    <body>
+        <script th:if="${filmeCadastrado}" th:inline="javascript">
+            /*<![CDATA[*/
+            exibirAlerta();
+            /*]]>*/
+        </script>
+
     <div class="info">
 
     <h1>Cadastrar Filme</h1>
@@ -23,7 +39,7 @@
         <h1 class="text-center">Adicionar Filme</h1>
         <div class="row justify-content-center">
           <div class="col-md-6">
-            <form action="/cadastrar" method="post" class="formulario-cadastro">
+            <form th:action="@{/cadastrar}" method="post" class="formulario-cadastro">
               <div class="form-group">
                   <label for="titulo">Título do Filme:</label>
                   <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Insira o título do filme" required>
@@ -47,7 +63,10 @@
       </div>
     
 </div>
-    
-    <script src="script.js"></script>
+<script th:if="${filmeCadastrado}">
+    alert('Filme cadastrado com sucesso!');  
+</script>
+
+   
 </body>
 </html>
