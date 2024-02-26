@@ -7,17 +7,41 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cine.filmes.model.Analise;
 import com.cine.filmes.model.Filme;
 import com.cine.filmes.util.Util;
 
 @Controller
 public class FilmeController {      
 
-    private List<Filme> listaFilmes = new ArrayList<>();
+    public static List<Analise> listaAnalise = new ArrayList<>();
+    // Lista de todos os filmes
 
+    public static List<Filme> listaFilmes = new ArrayList<>();
+
+    public Filme encontrarFilmePorId(int id) {
+        // Verifica se o ID está dentro dos limites da lista
+        if (id >= 0 && id < listaFilmes.size()) {
+            // Retorna o filme na posição do índice especificado
+            return listaFilmes.get(id);
+        } else {
+            // Se o ID estiver fora dos limites da lista, retorna null ou lança uma exceção, dependendo dos requisitos do seu aplicativo
+            return null; // ou lançar uma exceção de índice inválido
+        }
+    }
+
+    @GetMapping("/detalhes-filme/{id}")
+    public String exibirDetalhesFilme(@PathVariable("id") int id, Model model) {
+    Filme filme = encontrarFilmePorId(id);
+    model.addAttribute("filme", filme);
+    return "detalhes-filme";
+    }
+     
     @PostMapping("/cadastrar")
     public String cadastrarFilme(
             @RequestParam("titulo") String titulo,
@@ -31,16 +55,39 @@ public class FilmeController {
             if (!Util.checkData(titulo, sinopse, genero, anoLancamento)) {
                 model.addAttribute("filmeCadastrado", true);
                 listaFilmes.add(filme);    
-                System.out.println("Filme adicionado: " + filme.getTitulo());
+               
             } else {
                 model.addAttribute("filmeCadastrado", false);
-                System.out.println("Erro ao adicionar o         filme: " + filme.getTitulo());
             }                
        
         return "cadastro";
     }
  
-     
+    @GetMapping("/listar-filmes-json")
+    @ResponseBody
+    public List<Filme> listarFilmesJson() {
+        return listaFilmes;
+    }
+
+
+    @PostMapping("/analisar")
+    public String analisarFilme(
+            @RequestParam("filme") Filme filme,
+            @RequestParam("analise") String analiseBody,
+            @RequestParam("nota") int nota,
+            Model model) {
+                Analise analise = new Analise(filme, analiseBody, nota);
+
+                listaAnalise.add(analise);
+
+                return "detalhes";
+            }
+
+    @GetMapping("/listar-analises-json")
+    @ResponseBody
+    public List<Analise> listarAnalisesJson() {
+        return listaAnalise;
+    }
 
     @GetMapping("/inicio")
     public String inicio(){
