@@ -18,7 +18,36 @@
         </button>
     </a>
 
-    <div class="container">
+    <div class="container detail-cont" style="display: none;">
+      <h1 class="text-center mt-5 mb-4">Detalhes do Filme</h1>
+      <div class="row">
+        <div class="col-md-8">
+          <img src="https://via.placeholder.com/800x400" class="banner" alt="Banner do Filme">
+          <h2 class="titulo-detalhe">Título do Filme</h2>
+          <p class="sinopse-detalhe">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae felis vitae magna euismod lobortis nec in turpis. Nullam pharetra venenatis vestibulum. Integer tempus, nunc sit amet aliquam commodo, metus nisi eleifend mauris, eget maximus nisl nisl a ante. In hac habitasse platea dictumst. Ut lacinia eleifend nulla, vel lacinia leo iaculis in. Integer vitae risus vel nisl ultrices pharetra.
+          </p>
+          <hr>
+          <h3>Adicionar Análise</h3>
+          <div class="form-group">
+            <textarea class="form-control" rows="4" placeholder="Escreva sua análise aqui"></textarea>
+          </div>
+          <button type="button" class="btn btn-primary">Enviar Análise</button>
+        </div>
+        <div class="col-md-4">
+          <h3>Outros Detalhes</h3>
+          <ul class="list-group">
+            <li class="list-group-item subtitulo-detalhe">Título: Nome do Filme</li>
+            <li class="list-group-item genero-detalhe">Gênero: Gênero do Filme</li>
+            <li class="list-group-item data-detalhe">Ano de Lançamento: YYYY</li>
+            <!-- Adicione mais detalhes conforme necessário -->
+          </ul>
+        </div>
+      </div>
+    </div>
+</div>
+
+    <div class="container list-cont">
         <h1 class="text-center mt-5 mb-4">Catálogo de Filmes</h1>
         <div class="row">
           <div class="col-md-4">
@@ -120,40 +149,41 @@
             <!-- Adicione mais col-md-4 conforme necessário para mais filmes -->
         </div>
       </div>
+
 </div>
-    <script th:src="@{/script.js}"></script>
+    <script src="/script.js"></script>
 
-   <script>
-    /* CODIGO PARA RETORNAR A LISTA DE FILMES E DISTRIBUIR NA PAGINA LISTAR.HTML'*/   
-$(document).ready(function() {
-            $.ajax({
-                url: "/listar-filmes-json",
-                type: "GET",
-                success: function(filmes) {
-                    const titulos = document.querySelectorAll('.card-title');  
-                    const subtitulos = document.querySelectorAll('.card-text'); 
-                    if (titulos===null) {
-                        console.error("Erro ao obter lista de filmes:");
-                    } else {
-                        for (let i = 0; i < filmes.length; i++) {
-                            titulos[i].textContent = filmes[i].titulo;
-                        }
-                        for (let i = 0; i < filmes.length; i++) {
-                            subtitulos[i].textContent = filmes[i].genero; 
-                        }
-                    }
-                        
-                        
-                },
-                error: function(xhr, status, error) {
-                    console.error("Erro ao obter lista de filmes:", status, error);
-                }
-            });
-        });
+    <script>
+      /* CODIGO PARA RETORNAR A LISTA DE FILMES E DISTRIBUIR NA PAGINA LISTAR.HTML'*/   
+  $(document).ready(function() {
+              $.ajax({
+                  url: "/listar-filmes-json",
+                  type: "GET",
+                  success: function(filmes) {
+                      const titulos = document.querySelectorAll('.card-title');  
+                      const subtitulos = document.querySelectorAll('.card-text'); 
+                      if (titulos===null) {
+                          console.error("Erro ao obter lista de filmes:");
+                      } else {
+                          for (let i = 0; i < filmes.length; i++) {
+                              titulos[i].textContent = filmes[i].titulo;
+                          }
+                          for (let i = 0; i < filmes.length; i++) {
+                              subtitulos[i].textContent = filmes[i].genero; 
+                          }
+                      }
+                          
+                          
+                  },
+                  error: function(xhr, status, error) {
+                      console.error("Erro ao obter lista de filmes:", status, error);
+                  }
+              });
+          });
 
 
 
-   </script>
+    </script>
     
 </body>
 </html>

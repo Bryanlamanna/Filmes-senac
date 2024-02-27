@@ -31,7 +31,28 @@ public class FilmesApplication {
 
     // Método para criar um filme aleatório
     private static Filme criarFilmeAleatorio() {
-        String[] titulos = {"Matrix", "Senhor dos Anéis", "Interestelar", "Pulp Fiction", "Jurassic Park", "Star Wars", "Indiana Jones", "O lobo de Wall Street", "Street 2", "Cidade de Deus"};
+        String[] titulos = {
+            "Matrix",
+            "Senhor dos Anéis",
+            "Interestelar",
+            "Pulp Fiction",
+            "Jurassic Park",
+            "Star Wars",
+            "Indiana Jones",
+            "O Wall Street",
+            "Street 2",
+            "Cidade de Deus",
+            "O Poderoso Chefão",
+            "Forrest Gump",
+            "Titanic",
+            "Avatar",
+            "Clube da Luta",
+            "De Volta para o Futuro",
+            "O Silêncio dos Inocentes",
+            "Gladiador",
+            "A Origem",
+            "O Rei Leão"
+        };
         String[] generos = {"Ação", "Aventura", "Comédia", "Drama", "Ficção Científica"};
         int[] anosLancamento = {1999, 2001, 2010, 1994, 1993};
 

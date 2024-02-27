@@ -17,30 +17,31 @@ import com.cine.filmes.model.Filme;
 import com.cine.filmes.util.Util;
 
 @Controller
-public class FilmeController {      
-
-    public static List<Analise> listaAnalise = new ArrayList<>();
-    // Lista de todos os filmes
-
-    public static List<Filme> listaFilmes = new ArrayList<>();
-
-    public Filme encontrarFilmePorId(int id) {
-        // Verifica se o ID está dentro dos limites da lista
-        if (id >= 0 && id < listaFilmes.size()) {
-            // Retorna o filme na posição do índice especificado
-            return listaFilmes.get(id);
-        } else {
-            // Se o ID estiver fora dos limites da lista, retorna null ou lança uma exceção, dependendo dos requisitos do seu aplicativo
-            return null; // ou lançar uma exceção de índice inválido
+public class FilmeController {   
+    
+    @GetMapping("/detalhes/{id}")
+public String exibirDetalhes(@PathVariable("id") int id, Model model) {
+    Filme filmeSelecionado = null;
+    for (Filme filme : listaFilmes) {
+        if (filme.getId() == id) {
+            filmeSelecionado = filme;
+            break;
         }
     }
-
-    @GetMapping("/detalhes-filme/{id}")
-    public String exibirDetalhesFilme(@PathVariable("id") int id, Model model) {
-    Filme filme = encontrarFilmePorId(id);
-    model.addAttribute("filme", filme);
-    return "detalhes-filme";
+    if (filmeSelecionado != null) {
+        model.addAttribute("filme", filmeSelecionado);
+        return "detalhes";
+    } else {
+        // Tratar o caso em que o filme não é encontrado
+        return "erro";
     }
+}
+
+    // Lista de todas as análises
+    public static List<Analise> listaAnalise = new ArrayList<>();
+
+    // Lista de todos os filmes
+    public static List<Filme> listaFilmes = new ArrayList<>();
      
     @PostMapping("/cadastrar")
     public String cadastrarFilme(
@@ -96,6 +97,7 @@ public class FilmeController {
 
     @GetMapping("/detalhes")
     public String detalhes(){
+
         return "detalhes";
     }
 
@@ -109,6 +111,16 @@ public class FilmeController {
         return "listar";
     }
 
+    public Filme encontrarFilmePorId(int id) {
+        // Verifica se o ID está dentro dos limites da lista
+        if (id >= 0 && id < listaFilmes.size()) {
+            // Retorna o filme na posição do índice especificado
+            return listaFilmes.get(id);
+        } else {
+            // Se o ID estiver fora dos limites da lista, retorna null ou lança uma exceção, dependendo dos requisitos do seu aplicativo
+            return null; // ou lançar uma exceção de índice inválido
+        }
+    }
     
 }
  
