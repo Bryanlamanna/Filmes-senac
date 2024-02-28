@@ -1,17 +1,12 @@
 package com.cine.filmes.controller;
-
-
 import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.cine.filmes.model.Analise;
 import com.cine.filmes.model.Filme;
 import com.cine.filmes.util.Util;
@@ -19,24 +14,6 @@ import com.cine.filmes.util.Util;
 @Controller
 public class FilmeController {   
     
-    @GetMapping("/detalhes/{id}")
-public String exibirDetalhes(@PathVariable("id") int id, Model model) {
-    Filme filmeSelecionado = null;
-    for (Filme filme : listaFilmes) {
-        if (filme.getId() == id) {
-            filmeSelecionado = filme;
-            break;
-        }
-    }
-    if (filmeSelecionado != null) {
-        model.addAttribute("filme", filmeSelecionado);
-        return "detalhes";
-    } else {
-        // Tratar o caso em que o filme não é encontrado
-        return "erro";
-    }
-}
-
     // Lista de todas as análises
     public static List<Analise> listaAnalise = new ArrayList<>();
 
@@ -70,7 +47,6 @@ public String exibirDetalhes(@PathVariable("id") int id, Model model) {
         return listaFilmes;
     }
 
-
     @PostMapping("/analisar")
     public String analisarFilme(
             @RequestParam("filme") Filme filme,
@@ -95,11 +71,7 @@ public String exibirDetalhes(@PathVariable("id") int id, Model model) {
         return "index";
     }
 
-    @GetMapping("/detalhes")
-    public String detalhes(){
-
-        return "detalhes";
-    }
+    
 
     @GetMapping("/cadastro")
     public String cadastro(){

@@ -22,6 +22,7 @@
       <h1 class="text-center mt-5 mb-4">Detalhes do Filme</h1>
       <div class="row">
         <div class="col-md-8">
+          <input type="number" style="visibility: visible;" class="indexFilme">
           <img src="https://via.placeholder.com/800x400" class="banner" alt="Banner do Filme">
           <h2 class="titulo-detalhe">Título do Filme</h2>
           <p class="sinopse-detalhe">
@@ -32,7 +33,7 @@
           <div class="form-group">
             <textarea class="form-control" rows="4" placeholder="Escreva sua análise aqui"></textarea>
           </div>
-          <button type="button" class="btn btn-primary">Enviar Análise</button>
+          <button type="button" class="btn btn-primary enviarAnalise">Enviar Análise</button>
         </div>
         <div class="col-md-4">
           <h3>Outros Detalhes</h3>
@@ -152,8 +153,9 @@
 
 </div>
     <script src="/script.js"></script>
-
     <script>
+
+
       /* CODIGO PARA RETORNAR A LISTA DE FILMES E DISTRIBUIR NA PAGINA LISTAR.HTML'*/   
   $(document).ready(function() {
               $.ajax({
@@ -167,9 +169,11 @@
                       } else {
                           for (let i = 0; i < filmes.length; i++) {
                               titulos[i].textContent = filmes[i].titulo;
+
                           }
                           for (let i = 0; i < filmes.length; i++) {
                               subtitulos[i].textContent = filmes[i].genero; 
+                              
                           }
                       }
                           
@@ -183,7 +187,6 @@
 
 
 
-    </script>
-    
+    </script>  
 </body>
 </html>

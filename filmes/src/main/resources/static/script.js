@@ -5,6 +5,31 @@ const generoDetalhes = document.querySelector('.genero-detalhe');
 const anoDetalhes = document.querySelector('.data-detalhe');
 const sinopseDetalhes = document.querySelector('.sinopse-detalhe');
 const detailContainer = document.querySelector('.detail-cont');
+const indexFilme = document.querySelector('.indexFilme');
+const analiseBtn = document.querySelector('.enviarAnalise');
+
+analiseBtn.addEventListener('click', function() {
+    
+    // Função para obter o filme por ID
+
+    fetch(`/filme/${idFilme.value}`) // Faz uma requisição GET para o endpoint /filme/{id}
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Falha ao obter o filme.'); // Lança um erro se a resposta não for bem-sucedida
+            }
+            return response.json(); // Converte a resposta para JSON
+        })
+        .then(filme => {
+            // Aqui você pode fazer o que quiser com o filme retornado, por exemplo, exibir os detalhes na tela
+            console.log(filme);
+        })
+        .catch(error => {
+            console.error('Erro:', error); // Captura e exibe qualquer erro que ocorra durante a requisição
+        });
+
+
+
+})
 
 function extrairAno(data) {
     // Divida a string da data usando o separador "-"
@@ -17,13 +42,15 @@ function extrairAno(data) {
     return ano;
 }
 
-    for (let i = 0; i < detalheBtn.length; i++) {
+// EVENTLISTENER PARA OS BOTOES DE DETALHES 
+for (let i = 0; i < detalheBtn.length; i++) {
         detalheBtn[i].addEventListener('click', function() {
             $(document).ready(function() {
                 $.ajax({
                     url: "/listar-filmes-json",
                     type: "GET",
                     success: function(filmes) {
+                        indexFilme.value = i;
                         tituloDetalhes.textContent = filmes[i].titulo;
                         const subtitle = "Título: "+filmes[i].titulo;
                         subtituloDetalhes.textContent = subtitle;
@@ -48,3 +75,7 @@ function extrairAno(data) {
         })
         
     }
+
+
+
+
