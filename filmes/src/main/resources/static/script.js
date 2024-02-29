@@ -5,7 +5,8 @@ const generoDetalhes = document.querySelector('.genero-detalhe');
 const anoDetalhes = document.querySelector('.data-detalhe');
 const sinopseDetalhes = document.querySelector('.sinopse-detalhe');
 const detailContainer = document.querySelector('.detail-cont');
-const indexFilme = document.querySelector('.indexFilme');
+const indexFilme = document.querySelectorAll('.indexFilme');
+
 
 listarAnalises();
 
@@ -51,7 +52,8 @@ for (let i = 0; i < detalheBtn.length; i++) {
                     url: "/listar-filmes-json",
                     type: "GET",
                     success: function(filmes) {
-                        indexFilme.value = i;
+                        
+                        indexFilme.forEach(index => index.value = i);
                         tituloDetalhes.textContent = filmes[i].titulo;
                         const subtitle = "Título: "+filmes[i].titulo;
                         subtituloDetalhes.textContent = subtitle;

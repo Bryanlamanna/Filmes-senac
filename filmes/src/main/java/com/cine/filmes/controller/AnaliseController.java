@@ -30,7 +30,7 @@ public class AnaliseController {
             listaAnalise.add(analise);
             System.out.println(analise.getAnalise());
 
-            return "listar";
+            return "index";
 }
 
     @GetMapping("/listar-analises-json")

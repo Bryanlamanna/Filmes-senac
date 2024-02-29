@@ -15,6 +15,19 @@ public class FilmeController {
 
     // Lista de todos os filmes
     public static List<Filme> listaFilmes = new ArrayList<>();
+
+    @PostMapping("/excluir")
+    public String excluirFilme(@RequestParam("idFilme") int filmeIndex) {
+    if (filmeIndex >= 0 && filmeIndex < listaFilmes.size()) {
+        listaFilmes.remove(filmeIndex);
+        // Você pode adicionar uma mensagem de sucesso ou redirecionar para outra página aqui, se necessário.
+    } else {
+        // Trate o índice inválido adequadamente, por exemplo, redirecionando para uma página de erro.
+        return "error";
+    }
+    // Redireciona de volta para a página que lista os filmes após excluir o filme.
+    return "/index";
+}
      
     @PostMapping("/cadastrar")
     public String cadastrarFilme(
@@ -55,7 +68,7 @@ public class FilmeController {
 
     @GetMapping("/listar")
     public String listar(){
-        return "listar";
+        return "index";
     }
 
     public static Filme encontrarFilmePorId(int id) {
