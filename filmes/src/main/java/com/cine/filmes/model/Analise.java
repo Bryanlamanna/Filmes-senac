@@ -13,14 +13,14 @@ package com.cine.filmes.model;
 public class Analise {
     private int id;
     private Filme filme;
-    private String análise;
+    private String analise;
     private int nota;
 
     // Construtor
-    public Analise(Filme filme, String análise, int nota) {
+    public Analise(Filme filme, String analise, int nota) {
     
         this.filme = filme;
-        this.análise = análise;
+        this.analise = analise;
         this.nota = nota;
     }
 
@@ -40,12 +40,12 @@ public class Analise {
         this.filme = filme;
     }
 
-    public String getAnálise() {
-        return análise;
+    public String getAnalise() {
+        return analise;
     }
 
-    public void setAnálise(String análise) {
-        this.análise = análise;
+    public void setAnalise(String analise) {
+        this.analise = analise;
     }
 
     public int getNota() {

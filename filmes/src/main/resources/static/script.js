@@ -6,30 +6,31 @@ const anoDetalhes = document.querySelector('.data-detalhe');
 const sinopseDetalhes = document.querySelector('.sinopse-detalhe');
 const detailContainer = document.querySelector('.detail-cont');
 const indexFilme = document.querySelector('.indexFilme');
-const analiseBtn = document.querySelector('.enviarAnalise');
 
-analiseBtn.addEventListener('click', function() {
-    
-    // Função para obter o filme por ID
+listarAnalises();
 
-    fetch(`/filme/${idFilme.value}`) // Faz uma requisição GET para o endpoint /filme/{id}
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Falha ao obter o filme.'); // Lança um erro se a resposta não for bem-sucedida
-            }
-            return response.json(); // Converte a resposta para JSON
-        })
-        .then(filme => {
-            // Aqui você pode fazer o que quiser com o filme retornado, por exemplo, exibir os detalhes na tela
-            console.log(filme);
-        })
-        .catch(error => {
-            console.error('Erro:', error); // Captura e exibe qualquer erro que ocorra durante a requisição
-        });
-
-
-
-})
+// Função para fazer a solicitação AJAX e listar as análises no console
+function listarAnalises() {
+    // Fazendo a solicitação AJAX usando o método fetch
+    fetch('/listar-analises-json')
+    .then(response => {
+        // Verifica se a resposta da solicitação foi bem-sucedida
+        if (!response.ok) {
+            throw new Error('Erro ao buscar as análises');
+        }
+        // Parseia a resposta JSON
+        return response.json();
+    })
+    .then(data => {
+        // Lista as análises no console
+        console.log('Lista de Análises:');
+        console.log(data);
+    })
+    .catch(error => {
+        // Trata qualquer erro que ocorra durante a solicitação
+        console.error('Erro:', error);
+    });
+}
 
 function extrairAno(data) {
     // Divida a string da data usando o separador "-"

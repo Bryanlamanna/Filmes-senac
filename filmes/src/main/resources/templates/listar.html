@@ -22,18 +22,23 @@
       <h1 class="text-center mt-5 mb-4">Detalhes do Filme</h1>
       <div class="row">
         <div class="col-md-8">
-          <input type="number" style="visibility: visible;" class="indexFilme">
+          
           <img src="https://via.placeholder.com/800x400" class="banner" alt="Banner do Filme">
           <h2 class="titulo-detalhe">Título do Filme</h2>
           <p class="sinopse-detalhe">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae felis vitae magna euismod lobortis nec in turpis. Nullam pharetra venenatis vestibulum. Integer tempus, nunc sit amet aliquam commodo, metus nisi eleifend mauris, eget maximus nisl nisl a ante. In hac habitasse platea dictumst. Ut lacinia eleifend nulla, vel lacinia leo iaculis in. Integer vitae risus vel nisl ultrices pharetra.
           </p>
           <hr>
-          <h3>Adicionar Análise</h3>
-          <div class="form-group">
-            <textarea class="form-control" rows="4" placeholder="Escreva sua análise aqui"></textarea>
-          </div>
-          <button type="button" class="btn btn-primary enviarAnalise">Enviar Análise</button>
+          <form action="/analisar" class="analisarFilme" method="post"> 
+            <h3>Adicionar Análise</h3>
+            <div class="form-group">
+              <input type="number" style="visibility: visible;" class="indexFilme" name="idFilme">
+              <textarea class="form-control" rows="4" placeholder="Escreva sua análise aqui" name="analise"></textarea>
+              <input style="width: 6em; margin-top: 1em;" type="number" class="form-control" placeholder="Nota" id="nota" name="nota">
+            </div>  
+            <button type="submit" class="btn btn-primary">Enviar Análise</button>
+          </form>
+        
         </div>
         <div class="col-md-4">
           <h3>Outros Detalhes</h3>

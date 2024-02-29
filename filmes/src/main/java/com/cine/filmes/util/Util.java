@@ -2,6 +2,8 @@ package com.cine.filmes.util;
 
 public class Util {
 
+    
+
     public static boolean checkData(String titulo, String sinopse, String genero, String anoLancamento) {
         // Verifica se algum dos parâmetros é nulo ou vazio
         if (titulo == null || titulo.trim().isEmpty()) {

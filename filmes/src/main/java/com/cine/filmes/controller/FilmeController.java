@@ -7,15 +7,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.cine.filmes.model.Analise;
 import com.cine.filmes.model.Filme;
 import com.cine.filmes.util.Util;
 
 @Controller
 public class FilmeController {   
-    
-    // Lista de todas as análises
-    public static List<Analise> listaAnalise = new ArrayList<>();
 
     // Lista de todos os filmes
     public static List<Filme> listaFilmes = new ArrayList<>();
@@ -47,31 +43,10 @@ public class FilmeController {
         return listaFilmes;
     }
 
-    @PostMapping("/analisar")
-    public String analisarFilme(
-            @RequestParam("filme") Filme filme,
-            @RequestParam("analise") String analiseBody,
-            @RequestParam("nota") int nota,
-            Model model) {
-                Analise analise = new Analise(filme, analiseBody, nota);
-
-                listaAnalise.add(analise);
-
-                return "detalhes";
-            }
-
-    @GetMapping("/listar-analises-json")
-    @ResponseBody
-    public List<Analise> listarAnalisesJson() {
-        return listaAnalise;
-    }
-
     @GetMapping("/inicio")
     public String inicio(){
         return "index";
     }
-
-    
 
     @GetMapping("/cadastro")
     public String cadastro(){
@@ -83,7 +58,7 @@ public class FilmeController {
         return "listar";
     }
 
-    public Filme encontrarFilmePorId(int id) {
+    public static Filme encontrarFilmePorId(int id) {
         // Verifica se o ID está dentro dos limites da lista
         if (id >= 0 && id < listaFilmes.size()) {
             // Retorna o filme na posição do índice especificado
