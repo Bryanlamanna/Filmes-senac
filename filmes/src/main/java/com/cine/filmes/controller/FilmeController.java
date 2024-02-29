@@ -16,6 +16,30 @@ public class FilmeController {
     // Lista de todos os filmes
     public static List<Filme> listaFilmes = new ArrayList<>();
 
+    @PostMapping("/editar")
+    public String salvarEdicao(
+            @RequestParam("idFilme") int filmeIndex,
+            @RequestParam("titulo") String titulo,
+            @RequestParam("sinopse") String sinopse,
+            @RequestParam("genero") String genero,
+            @RequestParam("anoLancamento") String anoLancamento) {
+        
+        // Verifica se o índice do filme é válido
+        if (filmeIndex >= 0 && filmeIndex < listaFilmes.size()) {
+            // Atualiza os detalhes do filme existente
+            Filme filme = listaFilmes.get(filmeIndex);
+            filme.setTitulo(titulo);
+            filme.setSinopse(sinopse);
+            filme.setGenero(genero);
+            filme.setAnoLancamento(anoLancamento);
+        } else {
+            // Se o índice for inválido, redireciona para uma página de erro
+            return "error";
+        }
+        // Redireciona de volta para a página que lista os filmes após salvar a edição do filme.
+        return "/index";
+    }
+
     @PostMapping("/excluir")
     public String excluirFilme(@RequestParam("idFilme") int filmeIndex) {
     if (filmeIndex >= 0 && filmeIndex < listaFilmes.size()) {
@@ -28,6 +52,8 @@ public class FilmeController {
     // Redireciona de volta para a página que lista os filmes após excluir o filme.
     return "/index";
 }
+
+
      
     @PostMapping("/cadastrar")
     public String cadastrarFilme(

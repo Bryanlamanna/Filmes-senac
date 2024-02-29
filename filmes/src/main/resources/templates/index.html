@@ -54,14 +54,40 @@
             <input type="number" style="visibility: hidden;" class="indexFilme" name="idFilme">
             <button type="submit" class="btn btn-danger">Excluir</button>
           </form>
+
+          
+          <button class="btn btn-danger editarBtn">Editar</button>
+          
          
+          <form action="/editar" method="post" class="formulario-editar">
+            <div class="form-group">
+                <input type="number" style="visibility: hidden; width: 1px;" class="indexFilme" name="idFilme">
+
+                <label for="titulo">Novo título:</label>
+                <input type="text" class="form-control editarTitulo" id="titulo" name="titulo" placeholder="Insira o título do filme" required>
+            </div>
+            <div class="form-group">
+                <label for="sinopse">Nova Sinopse:</label>
+                <textarea class="form-control editarSinopse" id="sinopse" name="sinopse" rows="3" placeholder="Insira a sinopse do filme" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="genero">Novo Gênero:</label>
+                <input style="width: 15em; margin: 0 auto;" type="text" class="form-control editarGenero" id="genero" name="genero" placeholder="Insira o gênero do filme" required>
+            </div>
+            <div class="form-group">
+                <label for="anoLancamento">Ano de Lançamento:</label>
+                <input style="width: 10em ; margin: 0 auto;" type="date" class="form-control editarLancamento" id="anoLancamento" name="anoLancamento" placeholder="Insira o ano de lançamento do filme" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Salvar</button>
+            <button type="button" class="btn btn-secondary cancelEditar">Cancelar</button>
+        </form>
          
         </div>
       </div>
     </div>
 </div>
 
-    <div class="container list-cont">
+      <div class="container list-cont">
         <h1 class="text-center mt-5 mb-4">Catálogo de Filmes</h1>
         <div class="row">
           <div class="col-md-4">
@@ -167,8 +193,6 @@
 </div>
     <script src="/script.js"></script>
     <script>
-    
-
        /* CODIGO PARA RETORNAR A LISTA DE FILMES E DISTRIBUIR NA PAGINA LISTAR.HTML'*/   
   $(document).ready(function() {
               $.ajax({

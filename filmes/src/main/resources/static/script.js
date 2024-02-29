@@ -6,6 +6,9 @@ const anoDetalhes = document.querySelector('.data-detalhe');
 const sinopseDetalhes = document.querySelector('.sinopse-detalhe');
 const detailContainer = document.querySelector('.detail-cont');
 const indexFilme = document.querySelectorAll('.indexFilme');
+const editarBtn = document.querySelector('.editarBtn');
+const editarForm = document.querySelector('.formulario-editar');
+const cancelarBtn = document.querySelector('.cancelEditar');
 
 
 listarAnalises();
@@ -43,6 +46,38 @@ function extrairAno(data) {
     // Retorne o ano como uma string
     return ano;
 }
+
+//EVENTLISTENER PARA CANCELAR EDÇÃO
+
+cancelarBtn.addEventListener('click', function() {
+    editarForm.style.display = 'none';
+})
+
+//EVENTLISTENER PARA O BOTAO EDITAR
+
+editarBtn.addEventListener('click', function() {
+    $(document).ready(function() {
+        $.ajax({
+            url: "/listar-filmes-json",
+            type: "GET",
+            success: function(filmes) {
+
+                document.querySelector('.editarTitulo').value = filmes[indexFilme[1].value].titulo;  
+                document.querySelector('.editarSinopse').value = filmes[indexFilme[1].value].sinopse;
+                document.querySelector('.editarGenero').value = filmes[indexFilme[1].value].genero;
+                document.querySelector('.editarLancamento').value = filmes[indexFilme[1].value].anoLancamento;
+                
+                editarForm.style.display = 'block';
+
+                
+            },
+            error: function(xhr, status, error) {
+                console.error("Erro ao obter lista de filmes:", status, error);
+            }
+        });
+    });
+
+})    
 
 // EVENTLISTENER PARA OS BOTOES DE DETALHES 
 for (let i = 0; i < detalheBtn.length; i++) {
