@@ -50,16 +50,16 @@
             <!-- Adicione mais detalhes conforme necessário -->
           </ul>
           
-          <form action="/excluir" method="post">
-            <input type="number" style="visibility: hidden;" class="indexFilme" name="idFilme">
-            <button type="submit" class="btn btn-danger">Excluir</button>
+          <form id="excluirForm" action="/excluir" method="post">
+            <input type="number" style="visibility: hidden; display: none;" class="indexFilme" name="idFilme">
+            <button type="submit" onclick="confirmarExclusao()" class="btn btn-danger">Excluir</button>
           </form>
 
           
           <button class="btn btn-danger editarBtn">Editar</button>
           
-         
-          <form action="/editar" method="post" class="formulario-editar">
+          
+          <form action="/editar" method="post" class="formulario-editar" id="editarForm">
             <div class="form-group">
                 <input type="number" style="visibility: hidden; width: 1px;" class="indexFilme" name="idFilme">
 
@@ -78,7 +78,7 @@
                 <label for="anoLancamento">Ano de Lançamento:</label>
                 <input style="width: 10em ; margin: 0 auto;" type="date" class="form-control editarLancamento" id="anoLancamento" name="anoLancamento" placeholder="Insira o ano de lançamento do filme" required>
             </div>
-            <button type="submit" class="btn btn-primary">Salvar</button>
+            <button type="button" class="btn btn-primary" onclick="confirmarEdicao()">Salvar</button>
             <button type="button" class="btn btn-secondary cancelEditar">Cancelar</button>
         </form>
          
@@ -226,5 +226,17 @@
           });
 
     </script>  
+
+    <!-- Verifica se a edição foi salva e exibe um alerta -->
+    <script th:if="${edicaoSalva}">
+      alert('Edição salva com sucesso!');
+    </script>
+    <script th:if="${filmeCadastrado}">
+      alert('Filme cadastrado com sucesso!');  
+    </script>
+    <script th:if="${filmeExcluido}">
+      alert('Filme excluído com sucesso!');  
+    </script>
+  
 </body>
 </html>

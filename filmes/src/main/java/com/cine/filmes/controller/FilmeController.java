@@ -22,7 +22,8 @@ public class FilmeController {
             @RequestParam("titulo") String titulo,
             @RequestParam("sinopse") String sinopse,
             @RequestParam("genero") String genero,
-            @RequestParam("anoLancamento") String anoLancamento) {
+            @RequestParam("anoLancamento") String anoLancamento,
+            Model model) {
         
         // Verifica se o índice do filme é válido
         if (filmeIndex >= 0 && filmeIndex < listaFilmes.size()) {
@@ -36,14 +37,18 @@ public class FilmeController {
             // Se o índice for inválido, redireciona para uma página de erro
             return "error";
         }
+
+        // Adiciona um atributo ao modelo indicando que a edição foi salva
+        model.addAttribute("edicaoSalva", true);
         // Redireciona de volta para a página que lista os filmes após salvar a edição do filme.
         return "/index";
     }
 
     @PostMapping("/excluir")
-    public String excluirFilme(@RequestParam("idFilme") int filmeIndex) {
+    public String excluirFilme(@RequestParam("idFilme") int filmeIndex, Model model) {
     if (filmeIndex >= 0 && filmeIndex < listaFilmes.size()) {
         listaFilmes.remove(filmeIndex);
+        model.addAttribute("filmeExcluido", true);
         // Você pode adicionar uma mensagem de sucesso ou redirecionar para outra página aqui, se necessário.
     } else {
         // Trate o índice inválido adequadamente, por exemplo, redirecionando para uma página de erro.
@@ -51,6 +56,7 @@ public class FilmeController {
     }
     // Redireciona de volta para a página que lista os filmes após excluir o filme.
     return "/index";
+    
 }
 
 
@@ -66,14 +72,14 @@ public class FilmeController {
             Filme filme = new Filme(titulo, sinopse, genero, anoLancamento);
             
             if (!Util.checkData(titulo, sinopse, genero, anoLancamento)) {
-                model.addAttribute("filmeCadastrado", true);
                 listaFilmes.add(filme);    
                
             } else {
                 model.addAttribute("filmeCadastrado", false);
             }                
-       
-        return "cadastro";
+            model.addAttribute("filmeCadastrado", true);
+
+        return "index";
     }
  
     @GetMapping("/listar-filmes-json")

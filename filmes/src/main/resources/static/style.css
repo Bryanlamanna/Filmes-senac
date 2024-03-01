@@ -83,6 +83,8 @@ background-color: rgb(7, 95, 115);
 }
 
 .formulario-editar {
+    align-items: center;
+    justify-content: center;
     position: fixed;
     margin: 0 auto;
     top: 50%;

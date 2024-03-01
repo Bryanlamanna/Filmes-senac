@@ -10,9 +10,7 @@ const editarBtn = document.querySelector('.editarBtn');
 const editarForm = document.querySelector('.formulario-editar');
 const cancelarBtn = document.querySelector('.cancelEditar');
 
-
 listarAnalises();
-
 // Função para fazer a solicitação AJAX e listar as análises no console
 function listarAnalises() {
     // Fazendo a solicitação AJAX usando o método fetch
@@ -66,10 +64,7 @@ editarBtn.addEventListener('click', function() {
                 document.querySelector('.editarSinopse').value = filmes[indexFilme[1].value].sinopse;
                 document.querySelector('.editarGenero').value = filmes[indexFilme[1].value].genero;
                 document.querySelector('.editarLancamento').value = filmes[indexFilme[1].value].anoLancamento;
-                
                 editarForm.style.display = 'block';
-
-                
             },
             error: function(xhr, status, error) {
                 console.error("Erro ao obter lista de filmes:", status, error);
@@ -114,6 +109,25 @@ for (let i = 0; i < detalheBtn.length; i++) {
         
     }
 
+function confirmarExclusao() {
+        // Exibe um alerta para confirmar a exclusão
+        var confirmacao = confirm("Tem certeza que deseja excluir o filme?");
+        
+        // Se o usuário confirmar a exclusão, envia o formulário
+        if (confirmacao) {
+            document.getElementById("excluirForm").submit();
+        }
+    }
+
+function confirmarEdicao() {    
+    // Exibe um alerta para confirmar a exclusão
+    var confirmacao = confirm("Confirmar a edição do filme?");
+    
+    // Se o.Xr confirmar a exclusão, envia o formulário
+    if (confirmacao) {
+        document.getElementById("editarForm").submit();
+    }
+}    
 
 
 

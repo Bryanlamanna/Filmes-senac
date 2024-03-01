@@ -11,7 +11,7 @@ import com.cine.filmes.controller.FilmeController;
 @SpringBootApplication
 public class FilmesApplication {
 	
-	public static void main(String[] args) {
+public static void main(String[] args) {
 		SpringApplication.run(FilmesApplication.class, args);
 		System.out.println("Hello World!");
 
@@ -30,7 +30,7 @@ public class FilmesApplication {
     }
 
     // Método para criar um filme aleatório
-    private static Filme criarFilmeAleatorio() {
+private static Filme criarFilmeAleatorio() {
         String[] titulos = {
             "Matrix",
             "Senhor dos Anéis",
